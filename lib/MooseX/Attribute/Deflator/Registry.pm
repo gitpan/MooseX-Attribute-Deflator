@@ -1,15 +1,15 @@
-# 
+#
 # This file is part of MooseX-Attribute-Deflator
-# 
+#
 # This software is Copyright (c) 2010 by Moritz Onken.
-# 
+#
 # This is free software, licensed under:
-# 
+#
 #   The (three-clause) BSD License
-# 
+#
 package MooseX::Attribute::Deflator::Registry;
 BEGIN {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '1.100990';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '1.101670';
 }
 # ABSTRACT: Registry class for attribute deflators
 use Moose 1.01;
@@ -24,7 +24,6 @@ has deflators => (
 		get_deflator => 'get', 
 		set_deflator => 'set',
 		add_deflator => 'set',
-		find_deflator => 'get'
 	}
 );
 
@@ -38,10 +37,27 @@ has inflators => (
 		get_inflator => 'get', 
 		set_inflator => 'set',
 		add_inflator => 'set',
-		find_inflator => 'get'
 	}
 );
 
+sub find_deflator {
+    my ($self, $constraint) = @_;
+    ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
+    return $self->get_deflator($name) 
+    || ( $constraint->has_parent 
+          ? $self->set_deflator($name, $self->find_deflator($constraint->parent)) 
+          : undef );
+}
+
+
+sub find_inflator {
+    my ($self, $constraint) = @_;
+    ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
+    return $self->get_inflator($name) 
+    || ( $constraint->has_parent 
+          ? $self->set_inflator($name, $self->find_inflator($constraint->parent)) 
+          : undef );
+}
 
 1;
 
@@ -55,7 +71,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 1.100990
+version 1.101670
 
 =head1 DESCRIPTION
 
@@ -92,11 +108,17 @@ are overwritten.
 
 Predicate methods.
 
+=item B<< find_inflator( $type_constraint ) >>
+
+=item B<< find_deflator( $type_constraint )  >>
+
+Finds a suitable deflator/inflator by bubbling up the type hierarchy.
+
 =back
 
 =head1 AUTHOR
 
-  Moritz Onken
+Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -1,52 +1,55 @@
-# 
+#
 # This file is part of MooseX-Attribute-Deflator
-# 
+#
 # This software is Copyright (c) 2010 by Moritz Onken.
-# 
+#
 # This is free software, licensed under:
-# 
+#
 #   The (three-clause) BSD License
-# 
+#
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 BEGIN {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '1.100990';
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '1.101670';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
 use Moose::Role;
+use strict;
+use warnings;
 use MooseX::Attribute::Deflator;
 my $REGISTRY = MooseX::Attribute::Deflator->get_registry;
 no MooseX::Attribute::Deflator;
 
-foreach my $m (qw( deflator inflator)) {
-    my $get = 'get_' . $m;
-    ( my $action = $m ) =~ s/or/e/;
-    __PACKAGE__->meta->add_method(
-        $action => sub {
-            my ( $self, $obj, $value, $constraint, @rest ) = @_;
-            $value ||= $self->get_value($obj) if($m eq 'deflator' && ($self->has_value($obj) || $self->is_required));
-            return undef unless(defined $value);
-            $constraint ||= $self->type_constraint;
-            ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
-            if ( my $via = $REGISTRY->$get($name) ) {
-                return $via->(
-                    $obj, $constraint, sub { $self->$action( $obj, @_ ) }, @rest
-                ) for ($value);
-            }
-            else {
-                return $self->$action( $obj, $value, $constraint->parent,
-                    @rest )
-                  if ( $constraint->has_parent );
-                Moose->throw_error( "Cannot $action " . $self->name );
-            }
-        }
-    );
+sub deflate {
+    my ( $self, $obj, $value, $constraint, @rest ) = @_;
+    $value ||= $self->get_value($obj) if($self->has_value($obj) || $self->is_required);
+    return undef unless(defined $value);
+    $constraint ||= $self->type_constraint;
+    Moose->throw_error( "Cannot deflate " . $self->name )
+        unless ( my $via = $REGISTRY->find_deflator($constraint) );
+    return $via->(
+            $self, $constraint, sub { $self->deflate( $obj, @_ ) }, $obj, @rest
+    ) for ($value);
+}
 
-    __PACKAGE__->meta->add_method(
-        'has_' . $m => sub {
-            return $REGISTRY->$get( shift->type_constraint->name );
-        }
-    );
+
+sub inflate {
+    my ( $self, $obj, $value, $constraint, @rest ) = @_;
+    return undef unless(defined $value);
+    $constraint ||= $self->type_constraint;
+    Moose->throw_error( "Cannot inflate " . $self->name )
+        unless ( my $via = $REGISTRY->find_inflator($constraint) );
+    return $via->(
+            $self, $constraint, sub { $self->inflate( $obj, @_ ) }, $obj, @rest
+    ) for ($value);
+}
+
+sub has_deflator {
+    $REGISTRY->get_deflator( shift->type_constraint->name );
+}
+
+sub has_inflator {
+    $REGISTRY->get_inflator( shift->type_constraint->name );
 }
 
 1;
@@ -61,7 +64,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 1.100990
+version 1.101670
 
 =head1 SYNOPSIS
 
@@ -118,7 +121,7 @@ the attribute to the inflated value.
 
 =head1 AUTHOR
 
-  Moritz Onken
+Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 

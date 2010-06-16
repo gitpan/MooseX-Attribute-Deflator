@@ -1,15 +1,15 @@
-# 
+#
 # This file is part of MooseX-Attribute-Deflator
-# 
+#
 # This software is Copyright (c) 2010 by Moritz Onken.
-# 
+#
 # This is free software, licensed under:
-# 
+#
 #   The (three-clause) BSD License
-# 
+#
 package MooseX::Attribute::Deflator::Moose;
 BEGIN {
-  $MooseX::Attribute::Deflator::Moose::VERSION = '1.100990';
+  $MooseX::Attribute::Deflator::Moose::VERSION = '1.101670';
 }
 # ABSTRACT: Deflators for Moose type constraints
 
@@ -30,7 +30,7 @@ deflate 'Item', via { $_ };
 inflate 'Item', via { $_ };
 
 deflate 'HashRef[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
     my $value = {%$_};
     while(my($k,$v) = each %$value) {
         $value->{$k} = $deflate->($value->{$k}, $constraint->type_parameter);
@@ -39,7 +39,7 @@ deflate 'HashRef[]', via {
 };
 
 inflate 'HashRef[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
     my $value = $inflate->($_, $constraint->parent);
     while(my($k,$v) = each %$value) {
         $value->{$k} = $inflate->($value->{$k}, $constraint->type_parameter);
@@ -48,27 +48,37 @@ inflate 'HashRef[]', via {
 };
 
 deflate 'ArrayRef[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
     my $value = [@$_];
     $_ = $deflate->($_, $constraint->type_parameter) for(@$value);
     return $deflate->($value, $constraint->parent);
 };
 
 inflate 'ArrayRef[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
     my $value = $inflate->($_, $constraint->parent);
     $_ = $inflate->($_, $constraint->type_parameter) for(@$value);
     return $value;
 };
 
 deflate 'Maybe[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
     return $deflate->($_, $constraint->type_parameter);
 };
 
 inflate 'Maybe[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
     return $inflate->($_, $constraint->type_parameter);
+};
+
+deflate 'ScalarRef[]', via {
+    my ($attr, $constraint, $deflate) = @_;
+    return ${$deflate->($_, $constraint->type_parameter)};
+};
+
+inflate 'ScalarRef[]', via {
+    my ($attr, $constraint, $inflate) = @_;
+    return \$inflate->($_, $constraint->type_parameter);
 };
 
 1;
@@ -83,7 +93,7 @@ MooseX::Attribute::Deflator::Moose - Deflators for Moose type constraints
 
 =head1 VERSION
 
-version 1.100990
+version 1.101670
 
 =head1 SYNOPSIS
 
@@ -105,7 +115,7 @@ Some notes:
 
 =head1 AUTHOR
 
-  Moritz Onken
+Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 

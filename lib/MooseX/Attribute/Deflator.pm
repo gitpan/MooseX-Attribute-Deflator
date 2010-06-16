@@ -1,15 +1,15 @@
-# 
+#
 # This file is part of MooseX-Attribute-Deflator
-# 
+#
 # This software is Copyright (c) 2010 by Moritz Onken.
-# 
+#
 # This is free software, licensed under:
-# 
+#
 #   The (three-clause) BSD License
-# 
+#
 package MooseX::Attribute::Deflator;
 BEGIN {
-  $MooseX::Attribute::Deflator::VERSION = '1.100990';
+  $MooseX::Attribute::Deflator::VERSION = '1.101670';
 }
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
 
@@ -56,7 +56,7 @@ MooseX::Attribute::Deflator - Deflates and inflates Moose attributes to and from
 
 =head1 VERSION
 
-version 1.100990
+version 1.101670
 
 =head1 SYNOPSIS
 
@@ -141,9 +141,9 @@ and with the following arguments:
 
 =over 8
 
-=item C<$instance>
+=item C<$attr>
 
-The object instance on which this deflator/inflator has been called
+The attribute on which this deflator/inflator has been called
 
 =item C<$constraint>
 
@@ -155,9 +155,13 @@ A code reference to the deflate or inflate function. E.g. this is handy if you w
 to call the type's parent's parent inflate or deflate method:
 
  deflate 'MySubSubType', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
     return $deflate->($_, $constraint->parent->parent);
  };
+
+=item C<$instance>
+
+The object instance on which this deflator/inflator has been called
 
 =item C<@_>
 
@@ -170,7 +174,7 @@ or L<MooseX::Attribute::Deflator::Meta::Role::Attribute/deflate>.
 
 =head1 AUTHOR
 
-  Moritz Onken
+Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 

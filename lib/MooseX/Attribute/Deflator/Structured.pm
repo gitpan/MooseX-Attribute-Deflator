@@ -1,15 +1,15 @@
-# 
+#
 # This file is part of MooseX-Attribute-Deflator
-# 
+#
 # This software is Copyright (c) 2010 by Moritz Onken.
-# 
+#
 # This is free software, licensed under:
-# 
+#
 #   The (three-clause) BSD License
-# 
+#
 package MooseX::Attribute::Deflator::Structured;
 BEGIN {
-  $MooseX::Attribute::Deflator::Structured::VERSION = '1.100990';
+  $MooseX::Attribute::Deflator::Structured::VERSION = '1.101670';
 }
 # ABSTRACT: Deflators for MooseX::Types::Structured
 
@@ -17,17 +17,17 @@ BEGIN {
 use MooseX::Attribute::Deflator;
 
 deflate 'MooseX::Types::Structured::Optional[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
     return $deflate->($_, $constraint->type_parameter);
 };
 
 inflate 'MooseX::Types::Structured::Optional[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
     return $inflate->($_, $constraint->type_parameter);
 };
 
 deflate 'MooseX::Types::Structured::Map[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
     my $value = {%$_};
     my $constraints = $constraint->type_constraints;
     while(my($k,$v) = each %$value) {
@@ -37,7 +37,7 @@ deflate 'MooseX::Types::Structured::Map[]', via {
 };
 
 inflate 'MooseX::Types::Structured::Map[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
     my $value = $inflate->($_, $constraint->parent);
     my $constraints = $constraint->type_constraints;
     while(my($k,$v) = each %$value) {
@@ -47,7 +47,8 @@ inflate 'MooseX::Types::Structured::Map[]', via {
 };
 
 deflate 'MooseX::Types::Structured::Dict[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
+    $constraint = $constraint->parent;
     my %constraints = @{$constraint->type_constraints};
     my $value = {%$_};
     while(my($k,$v) = each %$value) {
@@ -57,7 +58,8 @@ deflate 'MooseX::Types::Structured::Dict[]', via {
 };
 
 inflate 'MooseX::Types::Structured::Dict[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
+    $constraint = $constraint->parent;
     my %constraints = @{$constraint->type_constraints};
     my $value = $inflate->($_, $constraint->parent);
     while(my($k,$v) = each %$value) {
@@ -67,7 +69,8 @@ inflate 'MooseX::Types::Structured::Dict[]', via {
 };
 
 deflate 'MooseX::Types::Structured::Tuple[]', via {
-    my ($obj, $constraint, $deflate) = @_;
+    my ($attr, $constraint, $deflate) = @_;
+    $constraint = $constraint->parent;
     my @constraints = @{$constraint->type_constraints};
     my $value = [@$_];
     for(my $i = 0; $i < @$value; $i++) {
@@ -77,7 +80,8 @@ deflate 'MooseX::Types::Structured::Tuple[]', via {
 };
 
 inflate 'MooseX::Types::Structured::Tuple[]', via {
-    my ($obj, $constraint, $inflate) = @_;
+    my ($attr, $constraint, $inflate) = @_;
+    $constraint = $constraint->parent;
     my @constraints = @{$constraint->type_constraints};
     my $value = $inflate->($_, $constraint->parent);
     for(my $i = 0; $i < @$value; $i++) {
@@ -98,7 +102,7 @@ MooseX::Attribute::Deflator::Structured - Deflators for MooseX::Types::Structure
 
 =head1 VERSION
 
-version 1.100990
+version 1.101670
 
 =head1 SYNOPSIS
 
@@ -110,7 +114,7 @@ Using this module registers sane type deflators and inflators for L<MooseX::Type
 
 =head1 AUTHOR
 
-  Moritz Onken
+Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 
