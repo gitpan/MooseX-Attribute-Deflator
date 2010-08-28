@@ -9,18 +9,13 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor::VERSION = '1.101670';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor::VERSION = '1.120000';
 }
 
 # ABSTRACT: Lazy inflate attributes
 use Moose::Role;
 use strict;
 use warnings;
-
-override _generate_type_coercion => sub {
-    my $self = shift;
-    return $self->_generate_skip_coercion_and_constraint($_[0], super);
-};
 
 override _generate_type_constraint_check => sub {
     my $self = shift;
@@ -47,19 +42,17 @@ MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor - Lazy inflate 
 
 =head1 VERSION
 
-version 1.101670
+version 1.120000
 
 =head1 METHODS
 
 =over 8
 
-=item override B<_generate_type_coercion>
-
 =item override B<_generate_type_constraint_check>
 
 =item B<_generate_skip_coercion_and_constraint>
 
-Coercion and type constraint verification is not processed if the
+Type constraint verification is not processed if the
 attribute has not been inflated yet.
 
 =back

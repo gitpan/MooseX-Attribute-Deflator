@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 BEGIN {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '1.101670';
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '1.120000';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -64,7 +64,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 1.101670
+version 1.120000
 
 =head1 SYNOPSIS
 
@@ -116,6 +116,9 @@ of the attribute.
 
 Inflates a string C<$string>. This method does not set the value of
 the attribute to the inflated value.
+
+=item B<< $attr->has_inflator >>
+=item B<< $attr->has_deflator >>
 
 =back
 

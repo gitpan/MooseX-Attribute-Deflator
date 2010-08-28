@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 BEGIN {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '1.101670';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '1.120000';
 }
 # ABSTRACT: Registry class for attribute deflators
 use Moose 1.01;
@@ -71,7 +71,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 1.101670
+version 1.120000
 
 =head1 DESCRIPTION
 
