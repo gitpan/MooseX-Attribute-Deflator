@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Attribute;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '1.120000';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '1.120001';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -27,7 +27,7 @@ override verify_against_type_constraint => sub {
 before get_value => sub {
     my ($self, $instance) = @_;
     return if(!$self->has_value($instance) || $self->is_inflated($instance));
-    $self->set_value($instance, $self->inflate($instance, $self->get_raw_value($instance)));
+    $self->set_raw_value($instance, $self->inflate($instance, $self->get_raw_value($instance)));
 };
 
 sub is_inflated {
@@ -60,7 +60,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Attribute - Lazy inflate attributes
 
 =head1 VERSION
 
-version 1.120000
+version 1.120001
 
 =head1 SYNOPSIS
 

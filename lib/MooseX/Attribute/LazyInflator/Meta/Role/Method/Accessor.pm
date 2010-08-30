@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor::VERSION = '1.120000';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor::VERSION = '1.120001';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -18,13 +18,12 @@ use strict;
 use warnings;
 
 sub _inline_check_lazy {
-    my ($self, $instance) = @_;
-    
+    my ( $self, $instance ) = @_;
     my $slot_exists = $self->_inline_has($instance);
-    my $code = "if($slot_exists && !\$attr->is_inflated($instance)) {\n";
-    $code .= "  \$attr->set_value($instance, \$attr->inflate($instance, ";
-    $code .= $self->_inline_get($instance);
-    $code .= "));\n";
+    my $code = "if($slot_exists && !\$attr->is_inflated($instance)) {\n  ";
+    $code .=
+      $self->_inline_store( $instance,
+        "\$attr->inflate($instance, " . $self->_inline_get($instance) . ")" );
     $code .= "}\n\n";
     $code .= $self->next::method($instance);
     return $code;
@@ -42,7 +41,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor - Lazy inflate att
 
 =head1 VERSION
 
-version 1.120000
+version 1.120001
 
 =head1 INHERITANCE
 
