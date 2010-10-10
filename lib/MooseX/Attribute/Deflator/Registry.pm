@@ -9,10 +9,11 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 BEGIN {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '1.120001';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '1.130000';
 }
 # ABSTRACT: Registry class for attribute deflators
-use Moose 1.01;
+use Moose 1.15;
+use Data::Dumper;
 
 has deflators => ( 
 	traits => ['Hash'],
@@ -43,20 +44,24 @@ has inflators => (
 sub find_deflator {
     my ($self, $constraint) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
-    return $self->get_deflator($name) 
-    || ( $constraint->has_parent 
-          ? $self->set_deflator($name, $self->find_deflator($constraint->parent)) 
-          : undef );
+    my $sub = $self->get_deflator($name);
+    if(!$sub && $constraint->has_parent) {
+        $sub = $self->find_deflator($constraint->parent);
+        $self->set_deflator($name, $sub) if($sub);
+    }
+    return $sub;
 }
 
 
 sub find_inflator {
     my ($self, $constraint) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
-    return $self->get_inflator($name) 
-    || ( $constraint->has_parent 
-          ? $self->set_inflator($name, $self->find_inflator($constraint->parent)) 
-          : undef );
+    my $sub = $self->get_inflator($name);
+    if(!$sub && $constraint->has_parent) {
+        $sub = $self->find_inflator($constraint->parent);
+        $self->set_inflator($name, $sub) if($sub);
+    }
+    return $sub;
 }
 
 1;
@@ -71,7 +76,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 1.120001
+version 1.130000
 
 =head1 DESCRIPTION
 

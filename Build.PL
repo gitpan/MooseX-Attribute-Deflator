@@ -30,14 +30,15 @@ my %module_build_args = (
     'Moritz Onken'
   ],
   'dist_name' => 'MooseX-Attribute-Deflator',
-  'dist_version' => '1.120001',
+  'dist_version' => '1.130000',
   'license' => 'bsd',
   'module_name' => 'MooseX::Attribute::Deflator',
   'recommends' => {},
   'recursive_test_files' => 1,
   'requires' => {
+    'Data::Dumper' => '0',
     'JSON' => '0',
-    'Moose' => '1.01',
+    'Moose' => '1.15',
     'Moose::Exporter' => '0',
     'Moose::Meta::Method::Accessor' => '0',
     'Moose::Role' => '0',

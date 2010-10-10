@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor::VERSION = '1.120001';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor::VERSION = '1.130000';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -41,7 +41,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor - Lazy inflate att
 
 =head1 VERSION
 
-version 1.120001
+version 1.130000
 
 =head1 INHERITANCE
 

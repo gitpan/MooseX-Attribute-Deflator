@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Structured;
 BEGIN {
-  $MooseX::Attribute::Deflator::Structured::VERSION = '1.120001';
+  $MooseX::Attribute::Deflator::Structured::VERSION = '1.130000';
 }
 # ABSTRACT: Deflators for MooseX::Types::Structured
 
@@ -102,7 +102,7 @@ MooseX::Attribute::Deflator::Structured - Deflators for MooseX::Types::Structure
 
 =head1 VERSION
 
-version 1.120001
+version 1.130000
 
 =head1 SYNOPSIS
 
