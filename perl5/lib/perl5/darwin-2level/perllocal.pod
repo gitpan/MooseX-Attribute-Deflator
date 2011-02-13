@@ -1,0 +1,44 @@
+=head2 Sun Feb 13 14:11:39 2011: C<Module> L<Eval::Closure|Eval::Closure>
+
+=over 4
+
+=item *
+
+C<installed into: /Users/mo/Documents/workspace/p5-moosex-attribute-deflator/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Sun Feb 13 14:13:23 2011: C<Module> L<Moose|Moose>
+
+=over 4
+
+=item *
+
+C<installed into: /Users/mo/Documents/workspace/p5-moosex-attribute-deflator/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.9902>
+
+=item *
+
+C<EXE_FILES: bin/moose-outdated>
+
+=back
+

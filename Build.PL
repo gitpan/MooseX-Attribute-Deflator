@@ -7,9 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   'build_requires' => {
-    'Carp' => '0',
     'DateTime' => '0',
-    'English' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
     'Module::Build' => '0.3601',
@@ -17,10 +15,8 @@ my %module_build_args = (
     'MooseX::Types' => '0',
     'MooseX::Types::Moose' => '0',
     'MooseX::Types::Structured' => '0',
-    'Scalar::Util' => '0',
     'Test::Exception' => '0',
-    'Test::More' => '0.94',
-    'perl' => '5.004'
+    'Test::More' => '0.88'
   },
   'configure_requires' => {
     'Module::Build' => '0.3601'
@@ -30,7 +26,7 @@ my %module_build_args = (
     'Moritz Onken'
   ],
   'dist_name' => 'MooseX-Attribute-Deflator',
-  'dist_version' => '1.130000',
+  'dist_version' => '1.130001',
   'license' => 'bsd',
   'module_name' => 'MooseX::Attribute::Deflator',
   'recommends' => {},

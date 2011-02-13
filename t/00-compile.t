@@ -2,7 +2,7 @@
 #
 # This file is part of MooseX-Attribute-Deflator
 #
-# This software is Copyright (c) 2010 by Moritz Onken.
+# This software is Copyright (c) 2011 by Moritz Onken.
 #
 # This is free software, licensed under:
 #
@@ -13,6 +13,9 @@ use strict;
 use warnings;
 
 use Test::More;
+
+
+
 use File::Find;
 use File::Temp qw{ tempdir };
 

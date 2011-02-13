@@ -1,7 +1,7 @@
 #
 # This file is part of MooseX-Attribute-Deflator
 #
-# This software is Copyright (c) 2010 by Moritz Onken.
+# This software is Copyright (c) 2011 by Moritz Onken.
 #
 # This is free software, licensed under:
 #
@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 BEGIN {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '1.130000';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '1.130001';
 }
 # ABSTRACT: Registry class for attribute deflators
 use Moose 1.15;
@@ -76,7 +76,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 1.130000
+version 1.130001
 
 =head1 DESCRIPTION
 
@@ -127,7 +127,7 @@ Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2010 by Moritz Onken.
+This software is Copyright (c) 2011 by Moritz Onken.
 
 This is free software, licensed under:
 

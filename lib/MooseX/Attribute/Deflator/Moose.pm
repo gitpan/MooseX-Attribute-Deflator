@@ -1,7 +1,7 @@
 #
 # This file is part of MooseX-Attribute-Deflator
 #
-# This software is Copyright (c) 2010 by Moritz Onken.
+# This software is Copyright (c) 2011 by Moritz Onken.
 #
 # This is free software, licensed under:
 #
@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Moose;
 BEGIN {
-  $MooseX::Attribute::Deflator::Moose::VERSION = '1.130000';
+  $MooseX::Attribute::Deflator::Moose::VERSION = '1.130001';
 }
 # ABSTRACT: Deflators for Moose type constraints
 
@@ -93,7 +93,7 @@ MooseX::Attribute::Deflator::Moose - Deflators for Moose type constraints
 
 =head1 VERSION
 
-version 1.130000
+version 1.130001
 
 =head1 SYNOPSIS
 
@@ -119,7 +119,7 @@ Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2010 by Moritz Onken.
+This software is Copyright (c) 2011 by Moritz Onken.
 
 This is free software, licensed under:
 
