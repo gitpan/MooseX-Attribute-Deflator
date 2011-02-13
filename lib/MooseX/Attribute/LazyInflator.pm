@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::VERSION = '1.130001';
+  $MooseX::Attribute::LazyInflator::VERSION = '1.130002';
 }
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
 
@@ -54,7 +54,7 @@ MooseX::Attribute::LazyInflator - Deflates and inflates Moose attributes to and 
 
 =head1 VERSION
 
-version 1.130001
+version 1.130002
 
 =head1 SYNOPSIS
 

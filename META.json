@@ -52,43 +52,43 @@
    "provides" : {
       "MooseX::Attribute::Deflator" : {
          "file" : "lib/MooseX/Attribute/Deflator.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::Deflator::Meta::Role::Attribute" : {
          "file" : "lib/MooseX/Attribute/Deflator/Meta/Role/Attribute.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::Deflator::Moose" : {
          "file" : "lib/MooseX/Attribute/Deflator/Moose.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::Deflator::Registry" : {
          "file" : "lib/MooseX/Attribute/Deflator/Registry.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::Deflator::Structured" : {
          "file" : "lib/MooseX/Attribute/Deflator/Structured.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::LazyInflator" : {
          "file" : "lib/MooseX/Attribute/LazyInflator.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Attribute" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Attribute.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Accessor.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Constructor.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       },
       "MooseX::Attribute::LazyInflator::Role::Class" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Role/Class.pm",
-         "version" : "1.130001"
+         "version" : "1.130002"
       }
    },
    "release_status" : "stable",
@@ -104,7 +104,7 @@
          "web" : "http://github.com/monken/p5-moosex-attribute-deflator"
       }
    },
-   "version" : "1.130001",
+   "version" : "1.130002",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
