@@ -5,6 +5,7 @@ MANIFEST
 META.json
 META.yml
 README
+README.pod
 dist.ini
 lib/MooseX/Attribute/Deflator.pm
 lib/MooseX/Attribute/Deflator/Meta/Role/Attribute.pm

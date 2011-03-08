@@ -1,16 +1,4 @@
-#
-# This file is part of MooseX-Attribute-Deflator
-#
-# This software is Copyright (c) 2011 by Moritz Onken.
-#
-# This is free software, licensed under:
-#
-#   The (three-clause) BSD License
-#
 package MooseX::Attribute::Deflator;
-BEGIN {
-  $MooseX::Attribute::Deflator::VERSION = '2.0.0';
-}
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
 
 use strict;
@@ -45,17 +33,7 @@ Moose::Util::_create_alias('Attribute', 'Deflator', 1, 'MooseX::Attribute::Defla
 
 1;
 
-
-
-=pod
-
-=head1 NAME
-
-MooseX::Attribute::Deflator - Deflates and inflates Moose attributes to and from a string
-
-=head1 VERSION
-
-version 2.0.0
+__END__
 
 =head1 SYNOPSIS
 
@@ -131,7 +109,7 @@ This comes at a cost: B<Union types are not supported>.
  deflate 'DateTime', via { $_->epoch };
  
  inflate 'DateTime', via { DateTime->from_epoch( epoch => $_ ) };
-
+    
 Defines a deflator or inflator for a given type constraint. This can also be
 a type constraint defined via L<MooseX::Types> and parameterized types.
 
@@ -162,6 +140,7 @@ to call the type's parent's parent inflate or deflate method:
 
 The object instance on which this deflator/inflator has been called
 
+
 =item C<@_>
 
 Any other arguments added to L<MooseX::Attribute::Deflator::Meta::Role::Attribute/inflate>
@@ -170,21 +149,3 @@ or L<MooseX::Attribute::Deflator::Meta::Role::Attribute/deflate>.
 =back
 
 =back
-
-=head1 AUTHOR
-
-Moritz Onken
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is Copyright (c) 2011 by Moritz Onken.
-
-This is free software, licensed under:
-
-  The (three-clause) BSD License
-
-=cut
-
-
-__END__
-

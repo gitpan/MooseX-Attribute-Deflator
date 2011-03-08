@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 BEGIN {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '1.130002';
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.0.0';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -26,6 +26,7 @@ sub deflate {
       if ( $self->has_value($obj) || $self->is_required );
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
+    return $value unless($constraint);
     Moose->throw_error( "Cannot deflate " . $self->name )
       unless ( my $via = $REGISTRY->find_deflator($constraint) );
     return
@@ -38,6 +39,7 @@ sub inflate {
     my ( $self, $obj, $value, $constraint, @rest ) = @_;
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
+    return $value unless($constraint);
     Moose->throw_error( "Cannot inflate " . $self->name )
       unless ( my $via = $REGISTRY->find_inflator($constraint) );
     return
@@ -70,7 +72,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 1.130002
+version 2.0.0
 
 =head1 SYNOPSIS
 

@@ -54,7 +54,7 @@ eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('JSON','any version') };
 eval { $v .= pmver('Module::Build','0.3601') };
-eval { $v .= pmver('Moose','1.15') };
+eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('Moose::Exporter','any version') };
 eval { $v .= pmver('Moose::Meta::Method::Accessor','any version') };
 eval { $v .= pmver('Moose::Role','any version') };
@@ -65,6 +65,7 @@ eval { $v .= pmver('MooseX::Types::Moose','any version') };
 eval { $v .= pmver('MooseX::Types::Structured','any version') };
 eval { $v .= pmver('Test::Exception','any version') };
 eval { $v .= pmver('Test::More','0.88') };
+eval { $v .= pmver('Test::Most','any version') };
 
 
 
