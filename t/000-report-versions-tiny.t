@@ -48,7 +48,6 @@ sub pmver {
     return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
-eval { $v .= pmver('Data::Dumper','any version') };
 eval { $v .= pmver('DateTime','any version') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
@@ -63,6 +62,8 @@ eval { $v .= pmver('Moose::Util::TypeConstraints','any version') };
 eval { $v .= pmver('MooseX::Types','any version') };
 eval { $v .= pmver('MooseX::Types::Moose','any version') };
 eval { $v .= pmver('MooseX::Types::Structured','any version') };
+eval { $v .= pmver('MyInterRole','any version') };
+eval { $v .= pmver('MyRole','any version') };
 eval { $v .= pmver('Test::Exception','any version') };
 eval { $v .= pmver('Test::More','0.88') };
 eval { $v .= pmver('Test::Most','any version') };
