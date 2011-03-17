@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 BEGIN {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.0.0';
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.0.1';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -27,7 +27,7 @@ sub deflate {
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
     return $value unless($constraint);
-    Moose->throw_error( "Cannot deflate " . $self->name )
+    return $value
       unless ( my $via = $REGISTRY->find_deflator($constraint) );
     return
       $via->( $self, $constraint, sub { $self->deflate( $obj, @_ ) },
@@ -40,7 +40,7 @@ sub inflate {
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
     return $value unless($constraint);
-    Moose->throw_error( "Cannot inflate " . $self->name )
+    return $value
       unless ( my $via = $REGISTRY->find_inflator($constraint) );
     return
       $via->( $self, $constraint, sub { $self->inflate( $obj, @_ ) },
@@ -51,13 +51,13 @@ sub inflate {
 sub has_deflator {
     my $self = shift;
     return unless ( $self->has_type_constraint );
-    $REGISTRY->get_deflator( $self->type_constraint->name );
+    $REGISTRY->find_deflator( $self->type_constraint, 'norecurse' );
 }
 
 sub has_inflator {
     my $self = shift;
     return unless ( $self->has_type_constraint );
-    $REGISTRY->get_inflator( $self->type_constraint->name );
+    $REGISTRY->find_inflator( $self->type_constraint, 'norecurse' );
 }
 
 1;
@@ -72,7 +72,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.0.0
+version 2.0.1
 
 =head1 SYNOPSIS
 

@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 BEGIN {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '2.0.0';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '2.0.1';
 }
 # ABSTRACT: Registry class for attribute deflators
 use Moose;
@@ -42,9 +42,10 @@ has inflators => (
 );
 
 sub find_deflator {
-    my ($self, $constraint) = @_;
+    my ($self, $constraint, $norecurse) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
     my $sub = $self->get_deflator($name);
+    return undef if(!$sub && $norecurse);
     if(!$sub && $constraint->has_parent) {
         $sub = $self->find_deflator($constraint->parent);
         $self->set_deflator($name, $sub) if($sub);
@@ -54,9 +55,10 @@ sub find_deflator {
 
 
 sub find_inflator {
-    my ($self, $constraint) = @_;
+    my ($self, $constraint, $norecurse) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
     my $sub = $self->get_inflator($name);
+    return undef if(!$sub && $norecurse);
     if(!$sub && $constraint->has_parent) {
         $sub = $self->find_inflator($constraint->parent);
         $self->set_inflator($name, $sub) if($sub);
@@ -76,7 +78,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 2.0.0
+version 2.0.1
 
 =head1 DESCRIPTION
 

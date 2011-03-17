@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution MooseX-Attribute-Deflator,
-version 2.0.0:
+version 2.0.1:
 
   Deflates and inflates Moose attributes to and from a string
 
