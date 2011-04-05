@@ -16,8 +16,10 @@ lib/MooseX/Attribute/LazyInflator.pm
 lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToClass.pm
 lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToRole.pm
 lib/MooseX/Attribute/LazyInflator/Meta/Role/Attribute.pm
+lib/MooseX/Attribute/LazyInflator/Meta/Role/Composite.pm
 lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Accessor.pm
 lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Constructor.pm
+lib/MooseX/Attribute/LazyInflator/Meta/Role/Role.pm
 lib/MooseX/Attribute/LazyInflator/Role/Class.pm
 t/00-compile.t
 t/000-report-versions-tiny.t

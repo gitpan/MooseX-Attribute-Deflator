@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::VERSION = '2.1.0';
+  $MooseX::Attribute::LazyInflator::VERSION = '2.1.1';
 }
 
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
@@ -32,6 +32,7 @@ Moose::Exporter->setup_import_methods(
         } )
     : (),
     role_metaroles => {
+          role => ['MooseX::Attribute::LazyInflator::Meta::Role::Role'],
           application_to_class =>
             ['MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToClass'],
           application_to_role =>
@@ -54,7 +55,7 @@ MooseX::Attribute::LazyInflator - Deflates and inflates Moose attributes to and 
 
 =head1 VERSION
 
-version 2.1.0
+version 2.1.1
 
 =head1 SYNOPSIS
 

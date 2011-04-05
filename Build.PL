@@ -7,19 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   'build_requires' => {
-    'DateTime' => '0',
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'Module::Build' => '0.3601',
-    'Moose::Util::TypeConstraints' => '0',
-    'MooseX::Types' => '0',
-    'MooseX::Types::Moose' => '0',
-    'MooseX::Types::Structured' => '0',
-    'MyInterRole' => '0',
-    'MyRole' => '0',
-    'Test::Exception' => '0',
-    'Test::More' => '0.88',
-    'Test::Most' => '0'
+    'Module::Build' => '0.3601'
   },
   'configure_requires' => {
     'Module::Build' => '0.3601'
@@ -29,18 +17,23 @@ my %module_build_args = (
     'Moritz Onken'
   ],
   'dist_name' => 'MooseX-Attribute-Deflator',
-  'dist_version' => '2.1.0',
+  'dist_version' => '2.1.1',
   'license' => 'bsd',
   'module_name' => 'MooseX::Attribute::Deflator',
   'recommends' => {},
   'recursive_test_files' => 1,
   'requires' => {
-    'JSON' => '0',
-    'Moose' => '0',
-    'Moose::Exporter' => '0',
-    'Moose::Meta::Method::Accessor' => '0',
-    'Moose::Role' => '0',
-    'Moose::Util' => '0'
+    'DateTime' => '0',
+    'File::Find' => '0',
+    'File::Temp' => '0',
+    'Module::Build' => '0.3601',
+    'Moose::Util::TypeConstraints' => '0',
+    'MooseX::Types' => '0',
+    'MooseX::Types::Moose' => '0',
+    'MooseX::Types::Structured' => '0',
+    'Test::Exception' => '0',
+    'Test::More' => '0.88',
+    'Test::Most' => '0'
   },
   'script_files' => []
 );
