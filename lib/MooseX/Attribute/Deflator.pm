@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator;
 BEGIN {
-  $MooseX::Attribute::Deflator::VERSION = '2.1.1';
+  $MooseX::Attribute::Deflator::VERSION = '2.1.2';
 }
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
 
@@ -55,7 +55,7 @@ MooseX::Attribute::Deflator - Deflates and inflates Moose attributes to and from
 
 =head1 VERSION
 
-version 2.1.1
+version 2.1.2
 
 =head1 SYNOPSIS
 
