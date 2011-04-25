@@ -60,6 +60,7 @@ eval { $v .= pmver('MooseX::Types::Structured','any version') };
 eval { $v .= pmver('Test::Exception','any version') };
 eval { $v .= pmver('Test::More','0.88') };
 eval { $v .= pmver('Test::Most','any version') };
+eval { $v .= pmver('Try::Tiny','any version') };
 
 
 

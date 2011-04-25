@@ -16,46 +16,46 @@ name: MooseX-Attribute-Deflator
 provides:
   MooseX::Attribute::Deflator:
     file: lib/MooseX/Attribute/Deflator.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::Deflator::Meta::Role::Attribute:
     file: lib/MooseX/Attribute/Deflator/Meta/Role/Attribute.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::Deflator::Moose:
     file: lib/MooseX/Attribute/Deflator/Moose.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::Deflator::Registry:
     file: lib/MooseX/Attribute/Deflator/Registry.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::Deflator::Structured:
     file: lib/MooseX/Attribute/Deflator/Structured.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator:
     file: lib/MooseX/Attribute/LazyInflator.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToClass:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToClass.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToRole.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::Attribute:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/Attribute.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::Composite:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/Composite.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Accessor.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Constructor.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Meta::Role::Role:
     file: lib/MooseX/Attribute/LazyInflator/Meta/Role/Role.pm
-    version: v2.1.2
+    version: v2.1.3
   MooseX::Attribute::LazyInflator::Role::Class:
     file: lib/MooseX/Attribute/LazyInflator/Role/Class.pm
-    version: v2.1.2
+    version: v2.1.3
 requires:
   DateTime: 0
   File::Find: 0
@@ -69,11 +69,12 @@ requires:
   Test::Exception: 0
   Test::More: 0.88
   Test::Most: 0
+  Try::Tiny: 0
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-Attribute-Deflator
   homepage: http://search.cpan.org/dist/MooseX-Attribute-Deflator/
   repository: git://github.com/monken/p5-moosex-attribute-deflator.git
-version: 2.1.2
+version: 2.1.3
 x_Dist_Zilla:
   plugins:
     -
@@ -151,7 +152,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Bugtracker
       name: '@Filter/Bugtracker'
-      version: 1.102670
+      version: 1.111080
     -
       class: Dist::Zilla::Plugin::Homepage
       name: '@Filter/Homepage'
@@ -159,7 +160,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Repository
       name: '@Filter/Repository'
-      version: 0.17
+      version: 0.18
     -
       class: Dist::Zilla::Plugin::MetaProvides::Package
       name: '@Filter/MetaProvides::Package'

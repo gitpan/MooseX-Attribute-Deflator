@@ -9,13 +9,12 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 BEGIN {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.2';
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.3';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
 use Moose::Role;
-use strict;
-use warnings;
+use Try::Tiny;
 use MooseX::Attribute::Deflator;
 my $REGISTRY = MooseX::Attribute::Deflator->get_registry;
 no MooseX::Attribute::Deflator;
@@ -26,26 +25,40 @@ sub deflate {
       if ( $self->has_value($obj) || $self->is_required );
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
-    return $value unless($constraint);
+    return $value unless ($constraint);
     return $value
       unless ( my $via = $REGISTRY->find_deflator($constraint) );
-    return
-      $via->( $self, $constraint, sub { $self->deflate( $obj, @_ ) },
-              $obj, @rest
-      ) for ($value);
+    my $return;
+    try {
+        $return = $via->( $self, $constraint,
+                          sub { $self->deflate( $obj, @_ ) },
+                          $obj, @rest
+        ) for ($value);
+    }
+    catch {
+        die qq{Failed to deflate value "$value" (${\($constraint->name)}): $_};
+    };
+    return $return;
 }
 
 sub inflate {
     my ( $self, $obj, $value, $constraint, @rest ) = @_;
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
-    return $value unless($constraint);
+    return $value unless ($constraint);
     return $value
       unless ( my $via = $REGISTRY->find_inflator($constraint) );
-    return
-      $via->( $self, $constraint, sub { $self->inflate( $obj, @_ ) },
-              $obj, @rest
-      ) for ($value);
+    my $return;
+    try {
+        $return = $via->( $self, $constraint,
+                          sub { $self->inflate( $obj, @_ ) },
+                          $obj, @rest
+        ) for ($value);
+    }
+    catch {
+        die qq{Failed to inflate value "$value" (${\($constraint->name)}): $_};
+    };
+    return $return;
 }
 
 sub has_deflator {
@@ -72,7 +85,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.1.2
+version 2.1.3
 
 =head1 SYNOPSIS
 
