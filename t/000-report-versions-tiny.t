@@ -53,6 +53,7 @@ eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('JSON','any version') };
 eval { $v .= pmver('Module::Build','0.3601') };
+eval { $v .= pmver('Moose','2.0007') };
 eval { $v .= pmver('Moose::Util::TypeConstraints','any version') };
 eval { $v .= pmver('MooseX::Types','any version') };
 eval { $v .= pmver('MooseX::Types::Moose','any version') };

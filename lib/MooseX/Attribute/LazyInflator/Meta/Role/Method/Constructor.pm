@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor::VERSION = '2.1.4';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor::VERSION = '2.1.5';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -42,7 +42,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor - Lazy inflate 
 
 =head1 VERSION
 
-version 2.1.4
+version 2.1.5
 
 =head1 METHODS
 
