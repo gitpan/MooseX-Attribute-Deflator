@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Composite;
 BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Composite::VERSION = '2.1.5';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Composite::VERSION = '2.1.6';
 }
 use Moose::Role;
 
@@ -44,7 +44,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Composite
 
 =head1 VERSION
 
-version 2.1.5
+version 2.1.6
 
 =head1 AUTHOR
 
