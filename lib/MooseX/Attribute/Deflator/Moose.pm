@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::Deflator::Moose;
-BEGIN {
-  $MooseX::Attribute::Deflator::Moose::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::Deflator::Moose::VERSION = '2.1.8';
 }
 # ABSTRACT: Deflators for Moose type constraints
 
@@ -93,7 +93,7 @@ MooseX::Attribute::Deflator::Moose - Deflators for Moose type constraints
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 SYNOPSIS
 

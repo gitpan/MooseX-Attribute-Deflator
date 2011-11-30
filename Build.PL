@@ -6,39 +6,39 @@ use Module::Build 0.3601;
 
 
 my %module_build_args = (
-  'build_requires' => {
-    'Module::Build' => '0.3601'
+  "build_requires" => {
+    "Module::Build" => "0.3601"
   },
-  'configure_requires' => {
-    'Module::Build' => '0.3601'
+  "configure_requires" => {
+    "Module::Build" => "0.3601"
   },
-  'dist_abstract' => 'Deflates and inflates Moose attributes to and from a string',
-  'dist_author' => [
-    'Moritz Onken'
+  "dist_abstract" => "Deflates and inflates Moose attributes to and from a string",
+  "dist_author" => [
+    "Moritz Onken"
   ],
-  'dist_name' => 'MooseX-Attribute-Deflator',
-  'dist_version' => '2.1.7',
-  'license' => 'bsd',
-  'module_name' => 'MooseX::Attribute::Deflator',
-  'recommends' => {},
-  'recursive_test_files' => 1,
-  'requires' => {
-    'DateTime' => '0',
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'JSON' => '0',
-    'Module::Build' => '0.3601',
-    'Moose' => '1.25',
-    'Moose::Util::TypeConstraints' => '0',
-    'MooseX::Types' => '0',
-    'MooseX::Types::Moose' => '0',
-    'MooseX::Types::Structured' => '0',
-    'Test::Exception' => '0',
-    'Test::More' => '0.88',
-    'Test::Most' => '0',
-    'Try::Tiny' => '0'
+  "dist_name" => "MooseX-Attribute-Deflator",
+  "dist_version" => "2.1.8",
+  "license" => "bsd",
+  "module_name" => "MooseX::Attribute::Deflator",
+  "recommends" => {},
+  "recursive_test_files" => 1,
+  "requires" => {
+    "DateTime" => 0,
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "JSON" => 0,
+    "Module::Build" => "0.3601",
+    "Moose" => "1.25",
+    "Moose::Util::TypeConstraints" => 0,
+    "MooseX::Types" => 0,
+    "MooseX::Types::Moose" => 0,
+    "MooseX::Types::Structured" => 0,
+    "Test::Exception" => 0,
+    "Test::More" => "0.88",
+    "Test::Most" => 0,
+    "Try::Tiny" => 0
   },
-  'script_files' => []
+  "script_files" => []
 );
 
 

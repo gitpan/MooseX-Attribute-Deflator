@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::Deflator::Registry;
-BEGIN {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::Deflator::Registry::VERSION = '2.1.8';
 }
 # ABSTRACT: Registry class for attribute deflators
 use Moose;
@@ -77,7 +77,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 DESCRIPTION
 

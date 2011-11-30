@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::Deflator::Structured;
-BEGIN {
-  $MooseX::Attribute::Deflator::Structured::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::Deflator::Structured::VERSION = '2.1.8';
 }
 # ABSTRACT: Deflators for MooseX::Types::Structured
 
@@ -102,7 +102,7 @@ MooseX::Attribute::Deflator::Structured - Deflators for MooseX::Types::Structure
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 SYNOPSIS
 

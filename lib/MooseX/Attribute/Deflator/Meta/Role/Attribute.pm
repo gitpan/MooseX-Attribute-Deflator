@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
-BEGIN {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.8';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -85,7 +85,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 SYNOPSIS
 

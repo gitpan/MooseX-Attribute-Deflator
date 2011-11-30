@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::LazyInflator::Role::Class;
-BEGIN {
-  $MooseX::Attribute::LazyInflator::Role::Class::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::LazyInflator::Role::Class::VERSION = '2.1.8';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -32,7 +32,7 @@ MooseX::Attribute::LazyInflator::Role::Class - Lazy inflate attributes
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 ATTRIBUTES
 

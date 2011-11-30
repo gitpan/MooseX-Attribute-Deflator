@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::Deflator;
-BEGIN {
-  $MooseX::Attribute::Deflator::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::Deflator::VERSION = '2.1.8';
 }
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
 
@@ -55,7 +55,7 @@ MooseX::Attribute::Deflator - Deflates and inflates Moose attributes to and from
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 SYNOPSIS
 

@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor;
-BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor::VERSION = '2.1.8';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -42,7 +42,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor - Lazy inflate att
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 INHERITANCE
 

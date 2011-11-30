@@ -8,8 +8,8 @@
 #   The (three-clause) BSD License
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole;
-BEGIN {
-  $MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole::VERSION = '2.1.7';
+{
+  $MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole::VERSION = '2.1.8';
 }
 use Moose::Role;
 
@@ -40,7 +40,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole
 
 =head1 VERSION
 
-version 2.1.7
+version 2.1.8
 
 =head1 AUTHOR
 
