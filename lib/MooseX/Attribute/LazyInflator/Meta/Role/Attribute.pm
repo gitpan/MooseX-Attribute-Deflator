@@ -1,7 +1,7 @@
 #
 # This file is part of MooseX-Attribute-Deflator
 #
-# This software is Copyright (c) 2011 by Moritz Onken.
+# This software is Copyright (c) 2012 by Moritz Onken.
 #
 # This is free software, licensed under:
 #
@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '2.1.8';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '2.1.9'; # TRIAL
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -233,7 +233,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Attribute - Lazy inflate attributes
 
 =head1 VERSION
 
-version 2.1.8
+version 2.1.9
 
 =head1 SYNOPSIS
 
@@ -293,7 +293,7 @@ Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2011 by Moritz Onken.
+This software is Copyright (c) 2012 by Moritz Onken.
 
 This is free software, licensed under:
 

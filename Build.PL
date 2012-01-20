@@ -17,7 +17,7 @@ my %module_build_args = (
     "Moritz Onken"
   ],
   "dist_name" => "MooseX-Attribute-Deflator",
-  "dist_version" => "2.1.8",
+  "dist_version" => "2.1.9",
   "license" => "bsd",
   "module_name" => "MooseX::Attribute::Deflator",
   "recommends" => {},
@@ -30,7 +30,7 @@ my %module_build_args = (
     "Module::Build" => "0.3601",
     "Moose" => "1.25",
     "Moose::Util::TypeConstraints" => 0,
-    "MooseX::Types" => 0,
+    "MooseX::Types" => "0.30",
     "MooseX::Types::Moose" => 0,
     "MooseX::Types::Structured" => 0,
     "Test::Exception" => 0,

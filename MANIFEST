@@ -6,8 +6,8 @@ META.json
 META.yml
 README
 README.pod
+benchmark.pl
 dist.ini
-fail.t
 lib/MooseX/Attribute/Deflator.pm
 lib/MooseX/Attribute/Deflator/Meta/Role/Attribute.pm
 lib/MooseX/Attribute/Deflator/Moose.pm

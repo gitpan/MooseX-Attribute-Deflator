@@ -1,7 +1,7 @@
 #
 # This file is part of MooseX-Attribute-Deflator
 #
-# This software is Copyright (c) 2011 by Moritz Onken.
+# This software is Copyright (c) 2012 by Moritz Onken.
 #
 # This is free software, licensed under:
 #
@@ -9,60 +9,124 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '2.1.8';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '2.1.9'; # TRIAL
 }
+
 # ABSTRACT: Registry class for attribute deflators
 use Moose;
 
-has deflators => ( 
-	traits => ['Hash'],
-	is => 'rw', 
-	isa => 'HashRef[CodeRef]', 
-	default    => sub { {} },
-    handles    => { 
-		has_deflator => 'get', 
-		get_deflator => 'get', 
-		set_deflator => 'set',
-		add_deflator => 'set',
-	}
+has deflators => (
+    traits  => ['Hash'],
+    is      => 'rw',
+    isa     => 'HashRef[CodeRef]',
+    default => sub { {} },
+    handles => {
+        has_deflator  => 'get',
+        get_deflator  => 'get',
+        set_deflator  => 'set',
+        _add_deflator => 'set',
+    }
 );
 
-has inflators => ( 
-	traits => ['Hash'],
-	is => 'rw', 
-	isa => 'HashRef[CodeRef]', 
-	default    => sub { {} },
-    handles    => { 
-		has_inflator => 'get', 
-		get_inflator => 'get', 
-		set_inflator => 'set',
-		add_inflator => 'set',
-	}
+has inlined_deflators => (
+    traits  => ['Hash'],
+    is      => 'rw',
+    isa     => 'HashRef[CodeRef]',
+    default => sub { {} },
+    handles => {
+        has_inlined_deflator  => 'get',
+        get_inlined_deflator  => 'get',
+        set_inlined_deflator  => 'set',
+        _add_inlined_deflator => 'set',
+    }
 );
+
+has inflators => (
+    traits  => ['Hash'],
+    is      => 'rw',
+    isa     => 'HashRef[CodeRef]',
+    default => sub { {} },
+    handles => {
+        has_inflator  => 'get',
+        get_inflator  => 'get',
+        set_inflator  => 'set',
+        _add_inflator => 'set',
+    }
+);
+
+has inlined_inflators => (
+    traits  => ['Hash'],
+    is      => 'rw',
+    isa     => 'HashRef[CodeRef]',
+    default => sub { {} },
+    handles => {
+        has_inlined_inflator  => 'get',
+        get_inlined_inflator  => 'get',
+        set_inlined_inflator  => 'set',
+        _add_inlined_inflator => 'set',
+    }
+);
+
+sub add_deflator {
+    my ( $self, $name, $deflator, $inlined ) = @_;
+    $self->_add_inlined_deflator( $name, $inlined ) if ($inlined);
+    return $self->_add_deflator( $name, $deflator );
+}
 
 sub find_deflator {
-    my ($self, $constraint, $norecurse) = @_;
+    my ( $self, $constraint, $norecurse ) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
     my $sub = $self->get_deflator($name);
-    return undef if(!$sub && $norecurse);
-    if(!$sub && $constraint->has_parent) {
-        $sub = $self->find_deflator($constraint->parent);
-        $self->set_deflator($name, $sub) if($sub);
+    return undef if ( !$sub && $norecurse );
+    if ( !$sub && $constraint->has_parent ) {
+        $sub = $self->find_deflator( $constraint->parent );
+        $self->set_deflator( $name, $sub ) if ($sub);
     }
     return $sub;
 }
 
+sub find_inlined_deflator {
+    my ( $self, $constraint, $norecurse ) = @_;
+    ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
+    my $sub = $self->get_deflator($name);
+    return undef if ( !$sub && $norecurse );
+    if ( !$sub && $constraint->has_parent ) {
+        $sub = $self->find_inlined_deflator( $constraint->parent );
+        $self->set_inlined_deflator( $name, $sub ) if ($sub);
+    }
+    return $self->get_inlined_deflator($name)
+        || die "Could not find inlined deflator for $name";
+}
+
+sub add_inflator {
+    my ( $self, $name, $inflator, $inlined ) = @_;
+    $self->_add_inlined_inflator( $name, $inlined ) if ($inlined);
+    return $self->_add_inflator( $name, $inflator );
+}
 
 sub find_inflator {
-    my ($self, $constraint, $norecurse) = @_;
+    my ( $self, $constraint, $norecurse ) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
     my $sub = $self->get_inflator($name);
-    return undef if(!$sub && $norecurse);
-    if(!$sub && $constraint->has_parent) {
-        $sub = $self->find_inflator($constraint->parent);
-        $self->set_inflator($name, $sub) if($sub);
+    return undef if ( !$sub && $norecurse );
+    if ( !$sub && $constraint->has_parent ) {
+        $sub = $self->find_inflator( $constraint->parent );
+        $self->set_inflator( $name, $sub ) if ($sub);
     }
     return $sub;
+}
+
+sub find_inlined_inflator {
+    my ( $self, $constraint, $norecurse ) = @_;
+    ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
+    my $sub = $self->get_inflator($name);
+    return undef if ( !$sub && $norecurse );
+    if ( !$sub && $constraint->has_parent ) {
+        $sub = $self->find_inlined_inflator( $constraint->parent );
+        $self->set_inlined_inflator( $name, $sub ) if ($sub);
+    }
+    return $self->get_inlined_inflator($name)
+        || die "Could not find inlined inflator for $name";
 }
 
 1;
@@ -77,7 +141,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 2.1.8
+version 2.1.9
 
 =head1 DESCRIPTION
 
@@ -128,7 +192,7 @@ Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2011 by Moritz Onken.
+This software is Copyright (c) 2012 by Moritz Onken.
 
 This is free software, licensed under:
 

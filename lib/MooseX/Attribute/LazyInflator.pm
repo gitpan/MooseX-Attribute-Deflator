@@ -1,7 +1,7 @@
 #
 # This file is part of MooseX-Attribute-Deflator
 #
-# This software is Copyright (c) 2011 by Moritz Onken.
+# This software is Copyright (c) 2012 by Moritz Onken.
 #
 # This is free software, licensed under:
 #
@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator;
 {
-  $MooseX::Attribute::LazyInflator::VERSION = '2.1.8';
+  $MooseX::Attribute::LazyInflator::VERSION = '2.1.9'; # TRIAL
 }
 
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
@@ -55,7 +55,7 @@ MooseX::Attribute::LazyInflator - Deflates and inflates Moose attributes to and 
 
 =head1 VERSION
 
-version 2.1.8
+version 2.1.9
 
 =head1 SYNOPSIS
 
@@ -105,7 +105,7 @@ Moritz Onken
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2011 by Moritz Onken.
+This software is Copyright (c) 2012 by Moritz Onken.
 
 This is free software, licensed under:
 
