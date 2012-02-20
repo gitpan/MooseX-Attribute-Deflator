@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '2.1.9'; # TRIAL
+  $MooseX::Attribute::Deflator::Registry::VERSION = '2.1.10'; # TRIAL
 }
 
 # ABSTRACT: Registry class for attribute deflators
@@ -77,25 +77,11 @@ sub find_deflator {
     my ( $self, $constraint, $norecurse ) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
     my $sub = $self->get_deflator($name);
-    return undef if ( !$sub && $norecurse );
-    if ( !$sub && $constraint->has_parent ) {
-        $sub = $self->find_deflator( $constraint->parent );
-        $self->set_deflator( $name, $sub ) if ($sub);
-    }
-    return $sub;
-}
-
-sub find_inlined_deflator {
-    my ( $self, $constraint, $norecurse ) = @_;
-    ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
-    my $sub = $self->get_deflator($name);
-    return undef if ( !$sub && $norecurse );
-    if ( !$sub && $constraint->has_parent ) {
-        $sub = $self->find_inlined_deflator( $constraint->parent );
-        $self->set_inlined_deflator( $name, $sub ) if ($sub);
-    }
-    return $self->get_inlined_deflator($name)
-        || die "Could not find inlined deflator for $name";
+    return ( $constraint, $sub, $self->get_inlined_deflator($name) )
+        if ($sub);
+    return undef if ($norecurse);
+    return $self->find_deflator( $constraint->parent )
+        if ( $constraint->has_parent );
 }
 
 sub add_inflator {
@@ -108,25 +94,11 @@ sub find_inflator {
     my ( $self, $constraint, $norecurse ) = @_;
     ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
     my $sub = $self->get_inflator($name);
-    return undef if ( !$sub && $norecurse );
-    if ( !$sub && $constraint->has_parent ) {
-        $sub = $self->find_inflator( $constraint->parent );
-        $self->set_inflator( $name, $sub ) if ($sub);
-    }
-    return $sub;
-}
-
-sub find_inlined_inflator {
-    my ( $self, $constraint, $norecurse ) = @_;
-    ( my $name = $constraint->name ) =~ s/\[.*\]/\[\]/;
-    my $sub = $self->get_inflator($name);
-    return undef if ( !$sub && $norecurse );
-    if ( !$sub && $constraint->has_parent ) {
-        $sub = $self->find_inlined_inflator( $constraint->parent );
-        $self->set_inlined_inflator( $name, $sub ) if ($sub);
-    }
-    return $self->get_inlined_inflator($name)
-        || die "Could not find inlined inflator for $name";
+    return ( $constraint, $sub, $self->get_inlined_inflator($name) )
+        if ($sub);
+    return undef if ($norecurse);
+    return $self->find_inflator( $constraint->parent )
+        if ( $constraint->has_parent );
 }
 
 1;
@@ -141,7 +113,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 2.1.9
+version 2.1.10
 
 =head1 DESCRIPTION
 
@@ -183,6 +155,8 @@ Predicate methods.
 =item B<< find_deflator( $type_constraint )  >>
 
 Finds a suitable deflator/inflator by bubbling up the type hierarchy.
+it returns the matching type constraint, its deflator an optionally
+its inlined deflator if it exists.
 
 =back
 

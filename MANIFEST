@@ -29,6 +29,7 @@ t/coerce.t
 t/lazyinflator.t
 t/lib/Types.pm
 t/moosex_types.t
+t/parameterizable.t
 t/release-has-version.t
 t/release-kwalitee.t
 t/release-minimum-version.t

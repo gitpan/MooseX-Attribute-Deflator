@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Moose;
 {
-  $MooseX::Attribute::Deflator::Moose::VERSION = '2.1.9'; # TRIAL
+  $MooseX::Attribute::Deflator::Moose::VERSION = '2.1.10'; # TRIAL
 }
 
 # ABSTRACT: Deflators for Moose type constraints
@@ -17,21 +17,20 @@ package MooseX::Attribute::Deflator::Moose;
 use MooseX::Attribute::Deflator;
 use JSON;
 
-deflate 'HashRef', via { JSON::encode_json($_) },
-    inline {'JSON::encode_json($value)'};
-inflate 'HashRef', via { JSON::decode_json($_) },
-    inline {'JSON::decode_json($value)'};
+deflate [qw(ArrayRef HashRef)], via { JSON::encode_json($_) },
+    inline_as {'JSON::encode_json($value)'};
+inflate [qw(ArrayRef HashRef)], via { JSON::decode_json($_) },
+    inline_as {'JSON::decode_json($value)'};
 
-deflate 'ArrayRef', via { JSON::encode_json($_) },
-    inline {'JSON::encode_json($value)'};
-inflate 'ArrayRef', via { JSON::decode_json($_) },
-    inline {'JSON::decode_json($value)'};
+deflate 'ScalarRef', via {$$_}, inline_as {'$$value'};
+inflate 'ScalarRef', via { \$_ }, inline_as {'\$value'};
 
-deflate 'ScalarRef', via {$$_}, inline {'$$value'};
-inflate 'ScalarRef', via { \$_ }, inline {'\$value'};
+deflate 'Bool', via { $_ ? JSON::XS::true : JSON::XS::false },
+    inline_as {'$value ? JSON::XS::true : JSON::XS::false'};
+inflate 'Bool', via { $_ ? 1 : 0 }, inline_as {'$value ? 1 : 0'};
 
-deflate 'Item', via {$_}, inline {'$value'};
-inflate 'Item', via {$_}, inline {'$value'};
+deflate 'Item', via {$_}, inline_as {'$value'};
+inflate 'Item', via {$_}, inline_as {'$value'};
 
 deflate 'HashRef[]', via {
     my ( $attr, $constraint, $deflate ) = @_;
@@ -41,9 +40,8 @@ deflate 'HashRef[]', via {
             = $deflate->( $value->{$k}, $constraint->type_parameter );
     }
     return $deflate->( $value, $constraint->parent );
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
     my $parent    = $deflators->( $constraint->parent );
     my $parameter = $deflators->( $constraint->type_parameter );
     return join( "\n",
@@ -52,11 +50,11 @@ deflate 'HashRef[]', via {
         '$value->{$k} = do {',
         '    my $value = $value->{$k};',
         '    $value = do {',
-        $parameter->( $constraint->type_parameter, @_ ),
+        $parameter,
         '    };',
         '  };',
         '}',
-        $parent->( $constraint->parent, @_ ),
+        $parent,
     );
 };
 
@@ -68,20 +66,19 @@ inflate 'HashRef[]', via {
             = $inflate->( $value->{$k}, $constraint->type_parameter );
     }
     return $value;
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
     my $parent    = $deflators->( $constraint->parent );
     my $parameter = $deflators->( $constraint->type_parameter );
     return join( "\n",
         '$value = do {',
-        $parent->( $constraint->parent, @_ ),
+        $parent,
         ' };',
         'while ( my ( $k, $v ) = each %$value ) {',
         '  $value->{$k} = do {',
         '    my $value = $value->{$k};',
         '    $value = do {',
-        $parameter->( $constraint->type_parameter, @_ ),
+        $parameter,
         '    };',
         '  };',
         '}',
@@ -94,9 +91,8 @@ deflate 'ArrayRef[]', via {
     my $value = [@$_];
     $_ = $deflate->( $_, $constraint->type_parameter ) for (@$value);
     return $deflate->( $value, $constraint->parent );
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
     my $parent    = $deflators->( $constraint->parent );
     my $parameter = $deflators->( $constraint->type_parameter );
     return join( "\n",
@@ -105,11 +101,11 @@ deflate 'ArrayRef[]', via {
         '  $_ = do {',
         '    my $value = $_;',
         '    $value = do {',
-        $parameter->( $constraint->type_parameter, @_ ),
+        $parameter,
         '    };',
         '  };',
         '}',
-        $parent->( $constraint->parent, @_ ),
+        $parent,
     );
 };
 
@@ -118,20 +114,19 @@ inflate 'ArrayRef[]', via {
     my $value = $inflate->( $_, $constraint->parent );
     $_ = $inflate->( $_, $constraint->type_parameter ) for (@$value);
     return $value;
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
     my $parent    = $deflators->( $constraint->parent );
     my $parameter = $deflators->( $constraint->type_parameter );
     return join( "\n",
         '$value = do {',
-        $parent->( $constraint->parent, @_ ),
+        $parent,
         ' };',
         'for( @$value ) {',
         '  $_ = do {',
         '    my $value = $_;',
         '    $value = do {',
-        $parameter->( $constraint->type_parameter, @_ ),
+        $parameter,
         '    };',
         '  };',
         '}',
@@ -142,47 +137,35 @@ inflate 'ArrayRef[]', via {
 deflate 'Maybe[]', via {
     my ( $attr, $constraint, $deflate ) = @_;
     return $deflate->( $_, $constraint->type_parameter );
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
-    return $deflators->( $constraint->type_parameter )
-        ->( $constraint->type_parameter, @_ );
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
+    return $deflators->( $constraint->type_parameter );
 };
 
 inflate 'Maybe[]', via {
     my ( $attr, $constraint, $inflate ) = @_;
     return $inflate->( $_, $constraint->type_parameter );
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
-    return $deflators->( $constraint->type_parameter )
-        ->( $constraint->type_parameter, @_ );
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
+    return $deflators->( $constraint->type_parameter );
 };
 
 deflate 'ScalarRef[]', via {
     my ( $attr, $constraint, $deflate ) = @_;
     return ${ $deflate->( $_, $constraint->type_parameter ) };
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
     my $parameter = $deflators->( $constraint->type_parameter );
-    return join( "\n",
-        '$value = do {',
-        $parameter->( $constraint->type_parameter, @_ ),
-        '};', '$$value' );
+    return join( "\n", '$value = do {', $parameter, '};', '$$value' );
 };
 
 inflate 'ScalarRef[]', via {
     my ( $attr, $constraint, $inflate ) = @_;
     return \$inflate->( $_, $constraint->type_parameter );
-}, inline {
-    my $constraint = shift;
-    my ( $attr, $deflators ) = @_;
+}, inline_as {
+    my ( $attr, $constraint, $deflators ) = @_;
     my $parameter = $deflators->( $constraint->type_parameter );
-    return join( "\n",
-        '$value = do {',
-        $parameter->( $constraint->type_parameter, @_ ),
-        '};', '\$value' );
+    return join( "\n", '$value = do {', $parameter, '};', '\$value' );
 };
 
 1;
@@ -197,7 +180,7 @@ MooseX::Attribute::Deflator::Moose - Deflators for Moose type constraints
 
 =head1 VERSION
 
-version 2.1.9
+version 2.1.10
 
 =head1 SYNOPSIS
 

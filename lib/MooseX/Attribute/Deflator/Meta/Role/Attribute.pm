@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.9'; # TRIAL
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.10'; # TRIAL
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -27,32 +27,45 @@ sub _inline_deflator {
     my $self = shift;
     my $role = Moose::Meta::Role->create_anon_role;
     foreach my $type (qw(deflator inflator)) {
-        my $find
-            = $type eq 'deflator'
-            ? 'find_inlined_deflator'
-            : 'find_inlined_inflator';
+        my $find        = "find_$type";
         my $method      = $type eq 'deflator' ? 'deflate' : 'inflate';
         my $tc          = $self->type_constraint;
         my $slot_access = $self->_inline_instance_get('$_[1]');
-        my $deflator    = $tc
-            ? do {
-            my $inline = eval { $REGISTRY->$find($tc) } or next;
-            $inline->( $tc, $self, sub { $REGISTRY->$find(@_) } );
-            }
-            : $slot_access;
-        my $has_value  = $self->_inline_instance_has('$_[1]');
-        my @check_lazy = $self->_inline_check_lazy(
+        my $has_value   = $self->_inline_instance_has('$_[1]');
+        my @check_lazy  = $self->_inline_check_lazy(
             '$_[1]',          '$type_constraint',
             '$type_coercion', '$type_message',
         );
+        my $deflator = $tc
+            ? do {
+            ( $tc, undef, my $inline ) = $REGISTRY->$find($tc);
+            next unless $inline;
+            my $find_sub;
+            $find_sub = sub {
+                my $type_constraint = shift;
+                my @tc              = $REGISTRY->$find($type_constraint);
+                return join( "\n",
+                    'my ($tc, $via) = $registry->find_' 
+                        . $type
+                        . '(Moose::Util::TypeConstraints::find_type_constraint("'
+                        . quotemeta($type_constraint) . '"));',
+                    'my ($attr, $obj, @rest) = @_;',
+                    '$via->($attr, $tc, sub { $attr->deflate($obj, @rest) });'
+                ) unless ( $tc[2] );
+                return $tc[2]->( $self, $tc[0], $find_sub );
+            };
+            $inline->( $self, $tc, $find_sub );
+            }
+            : '$value';
         my @code = ('sub {');
         if ( $type eq 'deflator' ) {
             push( @code,
+                'my $value = $_[2];',
+                'unless(defined $value) {',
                 @check_lazy,
-                $self->is_required
-                ? ""
-                : "return undef unless($has_value);",
-                'my $value = ' . $slot_access . ';',
+                "return undef unless($has_value);",
+                '$value = ' . $slot_access . ';',
+                '}',
             );
         }
         else {
@@ -60,8 +73,11 @@ sub _inline_deflator {
         }
         $role->add_method(
             $method => eval_closure(
-                environment => $self->_eval_environment,
-                source      => join( "\n", @code, $deflator, '}' )
+                environment => {
+                    %{ $self->_eval_environment },
+                    '$registry' => \$REGISTRY
+                },
+                source => join( "\n", @code, $deflator, '}' )
             )
         );
         $type eq 'deflator'
@@ -73,13 +89,13 @@ sub _inline_deflator {
 
 sub deflate {
     my ( $self, $obj, $value, $constraint, @rest ) = @_;
-    $value ||= $self->get_value($obj)
-        if ( $self->has_value($obj) || $self->is_required );
+    $value = $self->get_value($obj) unless(defined $value);
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
     return $value unless ($constraint);
     return $value
-        unless ( my $via = $REGISTRY->find_deflator($constraint) );
+        unless ( ( $constraint, my $via )
+        = $REGISTRY->find_deflator($constraint) );
     my $return;
     try {
         $return = $via->(
@@ -100,7 +116,8 @@ sub inflate {
     $constraint ||= $self->type_constraint;
     return $value unless ($constraint);
     return $value
-        unless ( my $via = $REGISTRY->find_inflator($constraint) );
+        unless ( ( $constraint, my $via )
+        = $REGISTRY->find_inflator($constraint) );
     my $return;
     try {
         $return = $via->(
@@ -118,13 +135,15 @@ sub inflate {
 sub has_deflator {
     my $self = shift;
     return unless ( $self->has_type_constraint );
-    $REGISTRY->find_deflator( $self->type_constraint, 'norecurse' );
+    my @tc = $REGISTRY->find_deflator( $self->type_constraint, 'norecurse' );
+    return @tc ? 1 : 0;
 }
 
 sub has_inflator {
     my $self = shift;
     return unless ( $self->has_type_constraint );
-    $REGISTRY->find_inflator( $self->type_constraint, 'norecurse' );
+    my @tc = $REGISTRY->find_inflator( $self->type_constraint, 'norecurse' );
+    return @tc ? 1 : 0;
 }
 
 after install_accessors => \&_inline_deflator if ( $Moose::VERSION >= 1.9 );
@@ -141,7 +160,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.1.9
+version 2.1.10
 
 =head1 SYNOPSIS
 

@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator;
 {
-  $MooseX::Attribute::Deflator::VERSION = '2.1.9'; # TRIAL
+  $MooseX::Attribute::Deflator::VERSION = '2.1.10'; # TRIAL
 }
 
 # ABSTRACT: Deflates and inflates Moose attributes to and from a string
@@ -21,10 +21,10 @@ use MooseX::Attribute::Deflator::Registry;
 use Moose::Util qw();
 
 sub via (&)    { $_[0] }
-sub inline (&) { $_[0] }
+sub inline_as (&) { $_[0] }
 
 Moose::Exporter->setup_import_methods(
-    as_is => [ qw( deflate inflate via inline ) ], );
+    as_is => [ qw( deflate inflate via inline_as ) ], );
 
 my $REGISTRY = MooseX::Attribute::Deflator::Registry->new;
 
@@ -42,8 +42,8 @@ sub inflate {
     $REGISTRY->add_inflator( $_, @_ ) for (@$types);
 }
 
-deflate 'Item', via {$_}, inline {'$value'};
-inflate 'Item', via {$_}, inline {'$value'};
+deflate 'Item', via {$_}, inline_as {'$value'};
+inflate 'Item', via {$_}, inline_as {'$value'};
 
 Moose::Util::_create_alias( 'Attribute', 'Deflator', 1,
     'MooseX::Attribute::Deflator::Meta::Role::Attribute' );
@@ -60,7 +60,7 @@ MooseX::Attribute::Deflator - Deflates and inflates Moose attributes to and from
 
 =head1 VERSION
 
-version 2.1.9
+version 2.1.10
 
 =head1 SYNOPSIS
 
@@ -73,10 +73,10 @@ version 2.1.9
 
  deflate 'DateTime',
     via { $_->epoch },
-    inline { '$value->epoch' }; # optional
+    inline_as { '$value->epoch' }; # optional
  inflate 'DateTime',
     via { DateTime->from_epoch( epoch => $_ ) },
-    inline { 'DateTime->from_epoch( epoch => $value )' }; # optional
+    inline_as { 'DateTime->from_epoch( epoch => $value )' }; # optional
 
  no MooseX::Attribute::Deflator;
 
@@ -141,7 +141,7 @@ can check whether an deflator has been inlined by calling:
 
  $attr->is_deflator_inlined;
 
-B<Inlining works in Moose >= 1.9 only.>
+B<< Inlining works in Moose >= 1.9 only. >>
 
 =head1 FUNCTIONS
 
@@ -153,11 +153,11 @@ B<Inlining works in Moose >= 1.9 only.>
 
  deflate 'DateTime',
     via { $_->epoch },
-    inline { '$value->epoch' }; # optional
+    inline_as { '$value->epoch' }; # optional
 
  inflate 'DateTime',
     via { DateTime->from_epoch( epoch => $_ ) },
-    inline { 'DateTime->from_epoch( epoch => $value )' }; # optional
+    inline_as { 'DateTime->from_epoch( epoch => $value )' }; # optional
 
 Defines a deflator or inflator for a given type constraint. This can also be
 a type constraint defined via L<MooseX::Types> and parameterized types.
@@ -275,9 +275,9 @@ adds only minimal overhead to deflating the attribute
 value manually.
 
                Rate get_value   deflate  accessor
- get_value  71480/s        --      -89%      -90%
- deflate   657895/s      820%        --      -12%
- accessor  751880/s      952%       14%        --
+ get_value  69832/s        --      -87%      -88%
+ deflate   543478/s      678%        --       -4%
+ accessor  564972/s      709%        4%        --
 
 =head1 AUTHOR
 
