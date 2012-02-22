@@ -9,10 +9,10 @@
 #
 package MooseX::Attribute::Deflator;
 {
-  $MooseX::Attribute::Deflator::VERSION = '2.1.10'; # TRIAL
+  $MooseX::Attribute::Deflator::VERSION = '2.1.11'; # TRIAL
 }
 
-# ABSTRACT: Deflates and inflates Moose attributes to and from a string
+# ABSTRACT: Deflate and inflate Moose attribute values
 
 use strict;
 use warnings;
@@ -56,11 +56,11 @@ Moose::Util::_create_alias( 'Attribute', 'Deflator', 1,
 
 =head1 NAME
 
-MooseX::Attribute::Deflator - Deflates and inflates Moose attributes to and from a string
+MooseX::Attribute::Deflator - Deflate and inflate Moose attribute values
 
 =head1 VERSION
 
-version 2.1.10
+version 2.1.11
 
 =head1 SYNOPSIS
 
@@ -240,7 +240,7 @@ L<MooseX::Attribute::Deflator::Moose> and L<MooseX::Attribute::Deflator::Structu
 
 The overhead for having custom deflators or inflators per attribute is minimal.
 The file C<benchmark.pl> tests three ways of deflating the value of a HashRef attribute
-to a json encoded string (using L<JSON::XS>).
+to a json encoded string (using L<JSON>).
 
  my $obj     = MyBenchmark->new( hashref => { foo => 'bar' } );
  my $attr    = MyBenchmark->meta->get_attribute('hashref');
@@ -255,7 +255,7 @@ Using the deflate attribute method, supplied by this module.
 
 =item accessor
 
- JSON::XS::encode_json($obj->hashref);
+ JSON::encode_json($obj->hashref);
 
 If the attribute comes with an accessor, you can use this
 method, to deflate its value. However, you need to know the
@@ -263,7 +263,7 @@ name of the accessor in order to use this method.
 
 =item get_value
 
- JSON::XS::encode_json($attr->get_value($obj, 'hashref'));
+ JSON::encode_json($attr->get_value($obj, 'hashref'));
 
 This solves the mentioned problem with not knowing the
 accessor name.

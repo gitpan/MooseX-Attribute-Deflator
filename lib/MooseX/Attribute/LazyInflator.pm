@@ -9,10 +9,10 @@
 #
 package MooseX::Attribute::LazyInflator;
 {
-  $MooseX::Attribute::LazyInflator::VERSION = '2.1.10'; # TRIAL
+  $MooseX::Attribute::LazyInflator::VERSION = '2.1.11'; # TRIAL
 }
 
-# ABSTRACT: Deflates and inflates Moose attributes to and from a string
+# ABSTRACT: Lazy inflate attributes on access for better performance
 
 use Moose();
 use MooseX::Attribute::Deflator ();
@@ -51,11 +51,11 @@ Moose::Util::_create_alias( 'Attribute', 'LazyInflator', 1,
 
 =head1 NAME
 
-MooseX::Attribute::LazyInflator - Deflates and inflates Moose attributes to and from a string
+MooseX::Attribute::LazyInflator - Lazy inflate attributes on access for better performance
 
 =head1 VERSION
 
-version 2.1.10
+version 2.1.11
 
 =head1 SYNOPSIS
 

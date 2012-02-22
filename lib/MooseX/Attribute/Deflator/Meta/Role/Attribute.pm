@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.10'; # TRIAL
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.11'; # TRIAL
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -36,7 +36,7 @@ sub _inline_deflator {
             '$_[1]',          '$type_constraint',
             '$type_coercion', '$type_message',
         );
-        my $deflator = $tc
+        my @deflator = $tc
             ? do {
             ( $tc, undef, my $inline ) = $REGISTRY->$find($tc);
             next unless $inline;
@@ -77,7 +77,7 @@ sub _inline_deflator {
                     %{ $self->_eval_environment },
                     '$registry' => \$REGISTRY
                 },
-                source => join( "\n", @code, $deflator, '}' )
+                source => join( "\n", @code, @deflator, '}' )
             )
         );
         $type eq 'deflator'
@@ -160,7 +160,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.1.10
+version 2.1.11
 
 =head1 SYNOPSIS
 

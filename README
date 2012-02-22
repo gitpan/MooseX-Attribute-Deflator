@@ -1,9 +1,9 @@
 
 
 This archive contains the distribution MooseX-Attribute-Deflator,
-version 2.1.10:
+version 2.1.11:
 
-  Deflates and inflates Moose attributes to and from a string
+  Deflate and inflate Moose attribute values
 
 This software is Copyright (c) 2012 by Moritz Onken.
 

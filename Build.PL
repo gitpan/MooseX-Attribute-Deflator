@@ -12,12 +12,12 @@ my %module_build_args = (
   "configure_requires" => {
     "Module::Build" => "0.3601"
   },
-  "dist_abstract" => "Deflates and inflates Moose attributes to and from a string",
+  "dist_abstract" => "Deflate and inflate Moose attribute values",
   "dist_author" => [
     "Moritz Onken"
   ],
   "dist_name" => "MooseX-Attribute-Deflator",
-  "dist_version" => "2.1.10",
+  "dist_version" => "2.1.11",
   "license" => "bsd",
   "module_name" => "MooseX::Attribute::Deflator",
   "recommends" => {},
@@ -33,9 +33,7 @@ my %module_build_args = (
     "MooseX::Types" => "0.30",
     "MooseX::Types::Moose" => 0,
     "MooseX::Types::Structured" => 0,
-    "Test::Exception" => 0,
     "Test::More" => "0.88",
-    "Test::Most" => 0,
     "Try::Tiny" => 0
   },
   "script_files" => []
