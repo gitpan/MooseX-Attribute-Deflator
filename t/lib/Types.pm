@@ -9,7 +9,7 @@
 #
 package Types;
 
-use MooseX::Types -declare => ['MyHashRef'];
+use MooseX::Types -declare => ['MyHashRef', 'Die'];
 use MooseX::Types::Moose qw/HashRef/;
 use MooseX::Attribute::Deflator;
 
@@ -21,5 +21,7 @@ subtype MyHashRef,
 deflate MyHashRef,
 	via { encode_json($_) };
 
+subtype Die, as HashRef;
+deflate Die, via { die "foo" }, inline_as { "die 'foo' "};
 
 1;

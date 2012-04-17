@@ -9,13 +9,14 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.1.11'; # TRIAL
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.2.0';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
 use Moose::Role;
 use Try::Tiny;
 use Eval::Closure;
+use Devel::PartialDump;
 use MooseX::Attribute::Deflator;
 my $REGISTRY = MooseX::Attribute::Deflator->get_registry;
 no MooseX::Attribute::Deflator;
@@ -57,19 +58,27 @@ sub _inline_deflator {
             $inline->( $self, $tc, $find_sub );
             }
             : '$value';
-        my @code = ('sub {');
+        @deflator = (
+            'local $@;',
+            'my $deflated = eval {',
+            @deflator,
+            '};',
+            'if($@) {',
+            'Moose->throw_error("Failed to ' 
+                . $method
+                . ' value " . Devel::PartialDump->new->dump($value) . " ('
+                . $tc->name
+                . '): $@");',
+            '}',
+            'return $deflated;',
+        ) if ($tc);
+        my @code = ( 'sub {', 'my $value = $_[2];' );
         if ( $type eq 'deflator' ) {
             push( @code,
-                'my $value = $_[2];',
-                'unless(defined $value) {',
+                'unless(defined $_[2]) {',
                 @check_lazy,
                 "return undef unless($has_value);",
-                '$value = ' . $slot_access . ';',
-                '}',
-            );
-        }
-        else {
-            push( @code, 'my $value = $_[2];' );
+                '$value = ' . $slot_access . ';', '}', );
         }
         $role->add_method(
             $method => eval_closure(
@@ -89,7 +98,7 @@ sub _inline_deflator {
 
 sub deflate {
     my ( $self, $obj, $value, $constraint, @rest ) = @_;
-    $value = $self->get_value($obj) unless(defined $value);
+    $value = $self->get_value($obj) unless ( defined $value );
     return undef unless ( defined $value );
     $constraint ||= $self->type_constraint;
     return $value unless ($constraint);
@@ -104,8 +113,9 @@ sub deflate {
         ) for ($value);
     }
     catch {
-        die
-            qq{Failed to deflate value "$value" (${\($constraint->name)}): $_};
+        my $dump = Devel::PartialDump->new->dump($value);
+        Moose->throw_error(
+            qq{Failed to deflate value $dump (${\($constraint->name)}): $_});
     };
     return $return;
 }
@@ -160,7 +170,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.1.11
+version 2.2.0
 
 =head1 SYNOPSIS
 

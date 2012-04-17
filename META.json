@@ -4,7 +4,7 @@
       "Moritz Onken"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120530",
    "license" : [
       "bsd"
    ],
@@ -26,80 +26,81 @@
       },
       "runtime" : {
          "requires" : {
-            "DateTime" : 0,
-            "File::Find" : 0,
-            "File::Temp" : 0,
-            "JSON" : 0,
+            "DateTime" : "0",
+            "Devel::PartialDump" : "0",
+            "File::Find" : "0",
+            "File::Temp" : "0",
+            "JSON" : "0",
             "Module::Build" : "0.3601",
             "Moose" : "1.25",
-            "Moose::Util::TypeConstraints" : 0,
+            "Moose::Util::TypeConstraints" : "0",
             "MooseX::Types" : "0.30",
-            "MooseX::Types::Moose" : 0,
-            "MooseX::Types::Structured" : 0,
+            "MooseX::Types::Moose" : "0",
+            "MooseX::Types::Structured" : "0",
             "Test::More" : "0.88",
-            "Try::Tiny" : 0
+            "Try::Tiny" : "0"
          }
       }
    },
    "provides" : {
       "MooseX::Attribute::Deflator" : {
          "file" : "lib/MooseX/Attribute/Deflator.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::Deflator::Meta::Role::Attribute" : {
          "file" : "lib/MooseX/Attribute/Deflator/Meta/Role/Attribute.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::Deflator::Moose" : {
          "file" : "lib/MooseX/Attribute/Deflator/Moose.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::Deflator::Registry" : {
          "file" : "lib/MooseX/Attribute/Deflator/Registry.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::Deflator::Structured" : {
          "file" : "lib/MooseX/Attribute/Deflator/Structured.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator" : {
          "file" : "lib/MooseX/Attribute/LazyInflator.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToClass" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToClass.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToRole.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Attribute" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Attribute.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Composite" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Composite.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Accessor.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Constructor.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Role" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Role.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       },
       "MooseX::Attribute::LazyInflator::Role::Class" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Role/Class.pm",
-         "version" : "v2.1.11"
+         "version" : "v2.2.0"
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/monken/p5-moosex-attribute-deflator/issues"
@@ -110,7 +111,7 @@
          "web" : "http://github.com/monken/p5-moosex-attribute-deflator"
       }
    },
-   "version" : "2.1.11",
+   "version" : "2.2.0",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -122,12 +123,12 @@
                }
             },
             "name" : "Prereqs",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::GatherDir",
             "name" : "GatherDir",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Compile",
@@ -152,12 +153,12 @@
          {
             "class" : "Dist::Zilla::Plugin::PodCoverageTests",
             "name" : "PodCoverageTests",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodSyntaxTests",
             "name" : "PodSyntaxTests",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ReportVersions::Tiny",
@@ -167,32 +168,32 @@
          {
             "class" : "Dist::Zilla::Plugin::PruneCruft",
             "name" : "PruneCruft",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PruneFiles",
             "name" : "PruneFiles",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ManifestSkip",
             "name" : "ManifestSkip",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ExtraTests",
             "name" : "ExtraTests",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::NextRelease",
             "name" : "NextRelease",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PkgVersion",
             "name" : "PkgVersion",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodWeaver",
@@ -207,12 +208,12 @@
          {
             "class" : "Dist::Zilla::Plugin::ExecDir",
             "name" : "ExecDir",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ShareDir",
             "name" : "ShareDir",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Bugtracker",
@@ -227,42 +228,42 @@
          {
             "class" : "Dist::Zilla::Plugin::MetaProvides::Package",
             "name" : "MetaProvides::Package",
-            "version" : "1.12060501"
+            "version" : "1.14000000"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",
             "name" : "MetaConfig",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::License",
             "name" : "License",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ModuleBuild",
             "name" : "ModuleBuild",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaYAML",
             "name" : "MetaYAML",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaJSON",
             "name" : "MetaJSON",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Readme",
             "name" : "Readme",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Manifest",
             "name" : "Manifest",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::CheckChangeLog",
@@ -272,40 +273,40 @@
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":InstallModules",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":IncModules",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":TestFiles",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":ExecFiles",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":ShareFiles",
-            "version" : "4.300006"
+            "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":MainModule",
-            "version" : "4.300006"
+            "version" : "4.300009"
          }
       ],
       "zilla" : {
          "class" : "Dist::Zilla::Dist::Builder",
          "config" : {
-            "is_trial" : "1"
+            "is_trial" : "0"
          },
-         "version" : "4.300006"
+         "version" : "4.300009"
       }
    }
 }

@@ -17,13 +17,14 @@ my %module_build_args = (
     "Moritz Onken"
   ],
   "dist_name" => "MooseX-Attribute-Deflator",
-  "dist_version" => "2.1.11",
+  "dist_version" => "2.2.0",
   "license" => "bsd",
   "module_name" => "MooseX::Attribute::Deflator",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "DateTime" => 0,
+    "Devel::PartialDump" => 0,
     "File::Find" => 0,
     "File::Temp" => 0,
     "JSON" => 0,

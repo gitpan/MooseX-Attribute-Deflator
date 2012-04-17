@@ -49,6 +49,7 @@ sub pmver {
 }
 
 eval { $v .= pmver('DateTime','any version') };
+eval { $v .= pmver('Devel::PartialDump','any version') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('JSON','any version') };

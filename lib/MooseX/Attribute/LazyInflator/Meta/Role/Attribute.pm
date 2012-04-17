@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '2.1.11'; # TRIAL
+  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '2.2.0';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -50,6 +50,7 @@ sub is_inflated {
             = defined $from_constructor
             ? $from_constructor
             : $self->get_raw_value($instance);
+        return 1 if(!defined $value && $self->is_required);
         $value = $self->type_constraint->coerce($value)
             if ( $self->should_coerce
             && $self->type_constraint->has_coercion );
@@ -65,7 +66,8 @@ after install_accessors => sub {
     my @code
         = $self->_inline_instance_is_inflated( '$_[1]', '$type_constraint',
         '$type_coercion', '$value', );
-    $self->meta->add_method(
+    my $role = Moose::Meta::Role->create_anon_role;
+    $role->add_method(
         'is_inflated' => eval_closure(
             environment => $self->_eval_environment,
             source      => join( "\n",
@@ -79,6 +81,7 @@ after install_accessors => sub {
                 '}' ),
         )
     );
+    Moose::Util::apply_all_roles($self, $role);
 } if ( $Moose::VERSION >= 1.9 );
 
 if ( Moose->VERSION < 1.9900 ) {
@@ -95,7 +98,7 @@ sub _inline_instance_is_inflated {
             . '->{_inflated_attributes}->{"'
             . quotemeta( $self->name )
             . '"}' );
-    return @code if ( !$self->has_type_constraint );    # TODO return 1 ?
+    return 1 if ( !$self->has_type_constraint );    # TODO return 1 ?
     $value ||= $self->_inline_instance_get($instance);
     my $coerce
         = $self->should_coerce && $self->type_constraint->has_coercion
@@ -270,7 +273,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Attribute - Lazy inflate attributes
 
 =head1 VERSION
 
-version 2.1.11
+version 2.2.0
 
 =head1 SYNOPSIS
 
