@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator;
 {
-  $MooseX::Attribute::LazyInflator::VERSION = '2.2.0';
+  $MooseX::Attribute::LazyInflator::VERSION = '2.2.1';
 }
 
 # ABSTRACT: Lazy inflate attributes on access for better performance
@@ -55,7 +55,7 @@ MooseX::Attribute::LazyInflator - Lazy inflate attributes on access for better p
 
 =head1 VERSION
 
-version 2.2.0
+version 2.2.1
 
 =head1 SYNOPSIS
 

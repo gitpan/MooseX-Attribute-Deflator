@@ -45,59 +45,59 @@
    "provides" : {
       "MooseX::Attribute::Deflator" : {
          "file" : "lib/MooseX/Attribute/Deflator.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::Deflator::Meta::Role::Attribute" : {
          "file" : "lib/MooseX/Attribute/Deflator/Meta/Role/Attribute.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::Deflator::Moose" : {
          "file" : "lib/MooseX/Attribute/Deflator/Moose.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::Deflator::Registry" : {
          "file" : "lib/MooseX/Attribute/Deflator/Registry.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::Deflator::Structured" : {
          "file" : "lib/MooseX/Attribute/Deflator/Structured.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator" : {
          "file" : "lib/MooseX/Attribute/LazyInflator.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToClass" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToClass.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::ApplicationToRole" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/ApplicationToRole.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Attribute" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Attribute.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Composite" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Composite.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Method::Accessor" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Accessor.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Method::Constructor" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Method/Constructor.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Meta::Role::Role" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Meta/Role/Role.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       },
       "MooseX::Attribute::LazyInflator::Role::Class" : {
          "file" : "lib/MooseX/Attribute/LazyInflator/Role/Class.pm",
-         "version" : "v2.2.0"
+         "version" : "v2.2.1"
       }
    },
    "release_status" : "stable",
@@ -111,7 +111,7 @@
          "web" : "http://github.com/monken/p5-moosex-attribute-deflator"
       }
    },
-   "version" : "2.2.0",
+   "version" : "2.2.1",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Moose;
 {
-  $MooseX::Attribute::Deflator::Moose::VERSION = '2.2.0';
+  $MooseX::Attribute::Deflator::Moose::VERSION = '2.2.1';
 }
 
 # ABSTRACT: Deflators for Moose type constraints
@@ -172,7 +172,7 @@ MooseX::Attribute::Deflator::Moose - Deflators for Moose type constraints
 
 =head1 VERSION
 
-version 2.2.0
+version 2.2.1
 
 =head1 SYNOPSIS
 

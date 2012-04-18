@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::LazyInflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '2.2.0';
+  $MooseX::Attribute::LazyInflator::Meta::Role::Attribute::VERSION = '2.2.1';
 }
 
 # ABSTRACT: Lazy inflate attributes
@@ -273,7 +273,7 @@ MooseX::Attribute::LazyInflator::Meta::Role::Attribute - Lazy inflate attributes
 
 =head1 VERSION
 
-version 2.2.0
+version 2.2.1
 
 =head1 SYNOPSIS
 

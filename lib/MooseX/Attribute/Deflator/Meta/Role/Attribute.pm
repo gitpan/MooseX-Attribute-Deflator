@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Meta::Role::Attribute;
 {
-  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.2.0';
+  $MooseX::Attribute::Deflator::Meta::Role::Attribute::VERSION = '2.2.1';
 }
 
 # ABSTRACT: Attribute meta role to support deflation
@@ -59,7 +59,6 @@ sub _inline_deflator {
             }
             : '$value';
         @deflator = (
-            'local $@;',
             'my $deflated = eval {',
             @deflator,
             '};',
@@ -170,7 +169,7 @@ MooseX::Attribute::Deflator::Meta::Role::Attribute - Attribute meta role to supp
 
 =head1 VERSION
 
-version 2.2.0
+version 2.2.1
 
 =head1 SYNOPSIS
 
