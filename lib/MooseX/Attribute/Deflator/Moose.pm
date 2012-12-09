@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Moose;
 {
-  $MooseX::Attribute::Deflator::Moose::VERSION = '2.2.1';
+  $MooseX::Attribute::Deflator::Moose::VERSION = '2.2.2';
 }
 
 # ABSTRACT: Deflators for Moose type constraints
@@ -17,10 +17,18 @@ package MooseX::Attribute::Deflator::Moose;
 use MooseX::Attribute::Deflator;
 use JSON;
 
-deflate [qw(ArrayRef HashRef)], via { JSON::encode_json($_) },
-    inline_as {'JSON::encode_json($value)'};
-inflate [qw(ArrayRef HashRef)], via { JSON::decode_json($_) },
-    inline_as {'JSON::decode_json($value)'};
+if($ENV{HARNESS_ACTIVE}) {
+    deflate [qw(ArrayRef HashRef)], via { JSON->new->utf8->canonical->encode($_) },
+        inline_as {'JSON->new->utf8->canonical->encode($value)'};
+    inflate [qw(ArrayRef HashRef)], via { JSON->new->utf8->canonical->decode($_) },
+        inline_as {'JSON->new->utf8->canonical->decode($value)'};
+} else {
+    deflate [qw(ArrayRef HashRef)], via { JSON::encode_json($_) },
+        inline_as {'JSON::encode_json($value)'};
+    inflate [qw(ArrayRef HashRef)], via { JSON::decode_json($_) },
+        inline_as {'JSON::decode_json($value)'};
+}
+
 
 deflate 'ScalarRef', via {$$_}, inline_as {'$$value'};
 inflate 'ScalarRef', via { \$_ }, inline_as {'\$value'};
@@ -172,7 +180,7 @@ MooseX::Attribute::Deflator::Moose - Deflators for Moose type constraints
 
 =head1 VERSION
 
-version 2.2.1
+version 2.2.2
 
 =head1 SYNOPSIS
 

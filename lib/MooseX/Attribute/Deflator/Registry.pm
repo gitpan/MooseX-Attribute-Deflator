@@ -9,7 +9,7 @@
 #
 package MooseX::Attribute::Deflator::Registry;
 {
-  $MooseX::Attribute::Deflator::Registry::VERSION = '2.2.1';
+  $MooseX::Attribute::Deflator::Registry::VERSION = '2.2.2';
 }
 
 # ABSTRACT: Registry class for attribute deflators
@@ -113,7 +113,7 @@ MooseX::Attribute::Deflator::Registry - Registry class for attribute deflators
 
 =head1 VERSION
 
-version 2.2.1
+version 2.2.2
 
 =head1 DESCRIPTION
 

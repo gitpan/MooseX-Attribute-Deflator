@@ -1,7 +1,6 @@
 use Test::More;
 use strict;
 use warnings;
-
 package MyTest;
 
 use Moose;
@@ -68,7 +67,7 @@ my @test = (
         value =>
             [ 'Hello', 100, $now, { key1 => 'value1', key2 => 'value2' } ],
         deflated => [
-            'Hello', 100, $now->epoch, '{"key2":"value2","key1":"value1"}'
+            'Hello', 100, $now->epoch, '{"key1":"value1","key2":"value2"}'
         ]
     },
     {   attribute => 'person',
@@ -84,7 +83,7 @@ my @test = (
         deflated => {
             birthday => $now->epoch,
             name =>
-                '{"middle":"[\"Theodor\"]","first":"Moritz","last":"Onken"}'
+                '{"first":"Moritz","last":"Onken","middle":"[\"Theodor\"]"}'
         }
     },
     {   attribute => 'map',
